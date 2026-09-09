@@ -4,13 +4,6 @@ services:
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
-    envVars:
-      - key: DB_PATH
-        value: /var/data/gold.db
-    disk:
-      name: gold-data
-      mountPath: /var/data
-      sizeGB: 1
 
   - type: cron
     name: gold-telegram-check
@@ -18,14 +11,3 @@ services:
     schedule: "*/15 * * * *"
     buildCommand: pip install -r requirements.txt
     startCommand: python gold_monitor.py
-    envVars:
-      - key: DB_PATH
-        value: /var/data/gold.db
-      - key: TELEGRAM_BOT_TOKEN
-        sync: false
-      - key: TELEGRAM_CHAT_IDS
-        sync: false
-    disk:
-      name: gold-data
-      mountPath: /var/data
-      sizeGB: 1
